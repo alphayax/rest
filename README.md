@@ -15,6 +15,8 @@ A simple project using curl in object oriented style
 
 ## Example
 
+Basic working example : 
+
 ```php
 $rest = new \alphayax\rest\Rest( 'https://api.github.com/users/alphayax/repos');
 $rest->addHeader( 'User-Agent', 'alphayax-rest');
@@ -22,3 +24,11 @@ $rest->GET();
 
 print_r( $rest->getCurlResponse());
 ```
+
+More examples can be found in the [exemple](example) directory.
+
+## Documentation
+
+Public functions signatures can be found [here](docs/rest.md). 
+
+
