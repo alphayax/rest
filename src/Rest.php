@@ -20,6 +20,7 @@ class Rest {
     /** @var array of HTTP Headers */
     protected $httpHeaders = [];
 
+    /** @var \alphayax\rest\Config */
     protected $config;
 
     /**

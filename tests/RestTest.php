@@ -68,5 +68,11 @@ class RestTest extends PHPUnit_Framework_TestCase {
         $rest = new \alphayax\rest\Rest( 'http://jsonplaceholder.typicode.com/posts/1');
         $rest->DELETE();
     }
+    
+    public function testBadURL() {
+        $this->setExpectedException( \Exception::class);
+        $rest = new \alphayax\rest\Rest( 'http://');
+        $rest->GET();
+    }
 
 }
