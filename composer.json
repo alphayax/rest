@@ -22,7 +22,7 @@
   },
   "autoload": {
     "psr-4": {
-      "alphayax\\utils\\": "src/"
+      "alphayax\\rest\\": "src/"
     }
   },
   "support": {

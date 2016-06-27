@@ -1,5 +1,5 @@
 <?php
-namespace alphayax\utils;
+namespace alphayax\rest;
 
 /**
  * Class Rest
@@ -20,25 +20,15 @@ class Rest {
     /** @var array of HTTP Headers */
     protected $httpHeaders = [];
 
-    /** @var bool Indicate if the return is in JSON format */
-    protected $isJson = true;
-
-    /** @var bool Send post data in Json or not */
-    protected $sendInJson = true;
-
-    /** @var bool Return assoc array instead of \stdClass */
-    protected $returnAsArray = true;
+    protected $config;
 
     /**
      * Rest constructor.
      * @param string $url
-     * @param bool   $isJson
-     * @param bool   $returnAsArray
      */
-    public function __construct( $url, $isJson = true, $returnAsArray = true){
+    public function __construct( $url){
+        $this->config        = new Config();
         $this->curlHandler   = curl_init( $url);
-        $this->isJson        = $isJson;
-        $this->returnAsArray = $returnAsArray;
     }
 
     /**
@@ -90,7 +80,7 @@ class Rest {
      */
     protected function addPostFields( $curlPostData){
         if( ! is_null( $curlPostData)){
-            $data = $this->sendInJson ? json_encode( $curlPostData) : $curlPostData;
+            $data = $this->config->isRequestToJsonEncode() ? json_encode( $curlPostData) : $curlPostData;
             curl_setopt( $this->curlHandler, CURLOPT_POSTFIELDS, $data);
         }
     }
@@ -109,7 +99,7 @@ class Rest {
      */
     public function setContentType_XFormURLEncoded(){
         $this->addHeader( 'Content-Type', 'application/x-www-form-urlencoded');
-        $this->sendInJson = false;
+        $this->config->setIsRequestToJsonEncode( false);
     }
 
     /**
@@ -117,7 +107,7 @@ class Rest {
      */
     public function setContentType_MultipartFormData(){
         $this->addHeader( 'Content-Type', 'multipart/form-data');
-        $this->sendInJson = false;
+        $this->config->setIsRequestToJsonEncode( false);
     }
 
     /**
@@ -158,8 +148,8 @@ class Rest {
         curl_close( $this->curlHandler);
 
         // Decode JSON if we need to
-        if( $this->isJson){
-            $this->curlResponse = json_decode( $this->curlResponse, $this->returnAsArray);
+        if( $this->config->isReturnToJsonDecode()){
+            $this->curlResponse = json_decode( $this->curlResponse, ! $this->config->isReturnObject());
         }
         $this->curlResponse;
     }
@@ -174,17 +164,26 @@ class Rest {
     /**
      * Force return as assoc array instead of \stdClass
      * @param boolean $returnAsArray
+     * @deprecated use config instead
      */
     public function setReturnAsArray( $returnAsArray = true) {
-        $this->returnAsArray = $returnAsArray;
+        $this->config->setIsReturnObject( ! $returnAsArray);
     }
 
     /**
      * Perform a json_decode on the request result
      * @param boolean $isJson
+     * @deprecated use config instead
      */
     public function setIsJson( $isJson = true) {
-        $this->isJson = $isJson;
+        $this->config->setIsRequestToJsonEncode( $isJson);
+    }
+
+    /**
+     * @return \alphayax\rest\Config
+     */
+    public function getConfig() {
+        return $this->config;
     }
 
 }

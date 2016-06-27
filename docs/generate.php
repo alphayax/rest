@@ -3,7 +3,7 @@
 require_once '../vendor/autoload.php';
 
 $srcDir     = __DIR__.'/../src';
-$namespace  = 'alphayax\utils';
+$namespace  = 'alphayax\rest';
 
 /// Services documentation
 $gen = new \alphayax\mdGen\MdGen( $srcDir, $namespace);
