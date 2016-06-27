@@ -6,4 +6,4 @@ $rest = new \alphayax\rest\Rest( 'https://api.github.com/users/alphayax/repos');
 $rest->addHeader( 'User-Agent', 'alphayax-rest');
 $rest->GET();
 
-print_r( $rest->getCurlResponse());
+print_r( $rest);

@@ -112,6 +112,14 @@ class Rest {
     }
 
     /**
+     * Return the HTTP Code
+     * @return int
+     */
+    public function getHttpCode() {
+        return $this->curlGetInfo[ 'http_code'];
+    }
+
+    /**
      * Define HTTP Headers in the REST call
      */
     protected function processHeaders(){
@@ -156,6 +164,8 @@ class Rest {
     }
 
     /**
+     * Return the response of the request
+     * Will be empty until a call at exec (via GET, POST, DELETE or PUT)
      * @return mixed
      */
     public function getCurlResponse(){
@@ -181,6 +191,7 @@ class Rest {
     }
 
     /**
+     * Return the config object to specify preferences about sending and receiving
      * @return \alphayax\rest\Config
      */
     public function getConfig() {

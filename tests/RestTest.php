@@ -39,6 +39,7 @@ class RestTest extends PHPUnit_Framework_TestCase {
         $this->assertAttributeNotEmpty( 'curlResponse', $rest);
         $result = $rest->getCurlResponse();
         $this->assertAttributeEquals( $result, 'curlResponse', $rest);
+        $this->assertEquals( 200, $rest->getHttpCode());
     }
 
     public function testPOST() {
@@ -51,6 +52,7 @@ class RestTest extends PHPUnit_Framework_TestCase {
             'body'  => 'toto',
         ]);
         $this->assertAttributeNotEmpty( 'curlResponse', $rest);
+        $this->assertEquals( 201, $rest->getHttpCode());
     }
 
     public function testPUT() {
@@ -68,7 +70,7 @@ class RestTest extends PHPUnit_Framework_TestCase {
         $rest = new \alphayax\rest\Rest( 'http://jsonplaceholder.typicode.com/posts/1');
         $rest->DELETE();
     }
-    
+
     public function testBadURL() {
         $this->setExpectedException( \Exception::class);
         $rest = new \alphayax\rest\Rest( 'http://');

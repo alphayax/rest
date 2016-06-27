@@ -13,6 +13,7 @@ class Config {
     protected $isReturnObject = false;
 
     /**
+     * If true, perform a json_encode before sending the request
      * @return boolean
      */
     public function isRequestToJsonEncode() {
@@ -20,6 +21,7 @@ class Config {
     }
 
     /**
+     * Perform a json_encode before sending the request
      * @param boolean $isRequestToJsonEncode
      */
     public function setIsRequestToJsonEncode( $isRequestToJsonEncode = true) {
@@ -27,6 +29,7 @@ class Config {
     }
 
     /**
+     * If true, perform a json_decode on the result
      * @return boolean
      */
     public function isReturnToJsonDecode() {
@@ -34,6 +37,7 @@ class Config {
     }
 
     /**
+     * Perform a json_decode on the result
      * @param boolean $isReturnToJsonDecode
      */
     public function setIsReturnToJsonDecode( $isReturnToJsonDecode = true) {
@@ -41,6 +45,7 @@ class Config {
     }
 
     /**
+     * If isReturnToJsonDecode is set to TRUE AND if isReturnObject is set to TRUE, result will be a stdClass
      * @return boolean
      */
     public function isReturnObject() {
@@ -48,6 +53,7 @@ class Config {
     }
 
     /**
+     * If isReturnToJsonDecode, Result will be a stdClass. Associative array otherwise
      * @param boolean $isReturnObject
      */
     public function setIsReturnObject( $isReturnObject = true) {
