@@ -152,7 +152,7 @@ class Rest {
         $this->curlGetInfo  = curl_getinfo( $this->curlHandler);
         if( $this->curlResponse === false) {
             curl_close( $this->curlHandler);
-            throw new \Exception( 'Error occurred during curl exec. Additional info: ' . var_export( $this->curlGetInfo));
+            throw new \Exception( 'Error occurred during curl exec. Additional info: ' . var_export( $this->curlGetInfo, true));
         }
         curl_close( $this->curlHandler);
 
