@@ -145,7 +145,7 @@ class Rest {
      * Execute the HTTP request
      * @throws \Exception
      */
-    private function exec(){
+    protected function exec(){
         $this->processHeaders();
         $this->addDebugInfos();
         $this->curlResponse = curl_exec( $this->curlHandler);
@@ -160,7 +160,6 @@ class Rest {
         if( $this->config->isReturnToJsonDecode()){
             $this->curlResponse = json_decode( $this->curlResponse, ! $this->config->isReturnObject());
         }
-        $this->curlResponse;
     }
 
     /**
